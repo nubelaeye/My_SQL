@@ -1,0 +1,358 @@
+# -- By clicking 'ctrl + /' we can make comments.
+# -- Database - is a collection of data in a format that can be easily accessed
+# -- (Digital) 
+# -- A sofware application used to manage(here it basically means to perform 
+# -- various operations - CRUD) our database is called DBMS(Data Base Management System..)
+# -- We can't directly access the database though we use DBMS 
+# -- So, we use SQL for interacting with DBMS 
+# -- Types of Databases...
+# -- 1. Relational Database/RDBMS -> Data stored in tables.. ex - MySQL, ORACLE, SQL Sever, 
+# Postgre SQL
+# -- 2. Non-Relational/No-SQL Database -> Data is not stored in tables.. ex- Mongo DB
+# -- And we're going to study only RDBMS
+
+# -- What is SQL? 
+# -- SQL(Structured Query Language)- is a programming language used to 
+# interact with relational databases.
+
+# -- It is basically used to perform CRUD operations:
+# -- C - Create
+# -- R - Read
+# -- U - Update
+# -- D - Delete
+
+# Previously, SQL was called as Sequel which stands for(Structured Engilsh Query Language) 
+# given by IBM company  
+
+# -- Databases consists of lot of inter-related databases..
+
+# -- More about table/Relation- combination of rows and columns
+# -- Table is made up of rows/tuple and columns/attribute.
+# -- Rows are represented in Horizontal Order where as columns are represented 
+# in Vertical order
+
+# Columns tells us about the general structure/schema systems.. 
+# ex - Roll_no, Name, Class, DOB, etc.
+# schema - means design
+
+# Rows tells us about individual data.. ex - 1, Saurabh, XII, 1990-08-02
+
+-- Creating our first Database
+-- create database Db_one;
+
+-- Every query ends with a ';' semi-colon... like full stop 
+-- SQL is not case sensitive - can be written in both Upper and lower case letters..
+-- ex..
+CreAte dataBASE college; -- Runs successfully..But we generally prefer Upper case
+
+-- deleting a database.. by using drop query
+-- drop database college;
+-- We can't create and drop the database together or perfrom both operations together..
+
+-- To perform further operations we 'use' query command for any given database.. ex-
+use college; -- It basically means now all opertions will be performed in college database..
+
+-- Creating our fist Table..
+-- Steps..
+-- 1. To use the database -> use college;
+-- 2. table  creating basic syntax.. -> 
+-- (IMP) => create table table_name( column_name datatype constraints - means limit); <=
+create table table_name(
+	id int primary key,
+    name varchar(50),
+    age int not null
+);
+
+-- How to add data into tables..
+insert into table_name values(1,"Varun",65); -- Syntax : insert into table_name(column_required_argument) 
+-- NOTE -> We have to give the following arguments according to the columns presents..
+-- ex - if we give an query -> insert into table_name values(2) # Will give an error: Column count doesn't match value count at row 1..
+insert into table_name values(3,"MOON x Dino(*-*)!, 29");
+
+-- insert into table_name values (34,"Nebula Eye", 23)
+-- insert into table_name vlaues (98, "Doremon", 81)
+
+--  (MOST IMPORTANT) -> How to view the table/data??
+-- we use 'select' keyword/query to view the data of the particular table or database..
+select * from table_name; -- So, here '*' means everything..
+
+-- SQL Datatypes.. defining the types of values that can be stored in a column.
+-- 1. [Char] -> string(0-255) can store characters of fixed length ; ex-char(50)
+-- 2. [Varchar] -> string(0-255) can store characters up to given length. ; ex-varchar(50)
+-- varchar is dynamic and uses less memory space than char datatype...
+-- 3. [Blob] -> string(0-65535), can store binary large object. ; ex-blob(100) It is used to store binary objects
+-- 4. [Int] -> integer INT SIGNED(−2,147,483,648 - 2,147,483,647) 
+-- The INT data type occupies 4 bytes (32 bits). 
+-- Exam based point- INT in MySQL stores integers from −2³¹ to 2³¹−1 when signed. UNSIGNED removes the negative range, giving 0 to 2³²−1.
+-- We can even find unsigned data range by - just taking both minimum and maximum data range & adding both and in unsigned minimum value is always 0.
+-- 5. [Tinyint] -> integer (-128 - 127)
+-- 6. [Bigint] -> integer (−9,223,372,036,854,775,808 to 9,223,372,036,854,775,807)
+-- 7. [Bit] -> can store x-bit values, x can range from 1 to 64. ex - bit(2)
+-- 8. [Float] -> Decimal/Point numbers - with precision of 23 digits
+-- 9. [Double] -> Decimal/Point numbers - with 24 to 53 digits precision
+-- 10.[Boolean] -> Boolean values 0 or 1. 
+-- 11.[Date] -> date in format YYYY-MM-DD ranging from 1000-01-01 to 9999-12-31.
+-- 12.[Year] -> years in 4 digits format ranging from 1901 to 2155.
+
+-- Signed and Unsigned datatypes... 
+-- signed datatype -> -ve & +ve both may occur... ex - a number to be inputed.
+-- Unsigned datatype -> only +ve no. occur.. ex- age, time, etc. It increase the range of +ve numbers..
+
+-- [IMPORTANT] -> Types of SQL Commands...
+-- 1. DDL (Data definiton Language) -> works on the structure/schema of database objects like tables and columns. ex - create, alter, drop, truncate, etc.
+-- 2. DQL (Data Query Language) -> select
+-- 3. DML (Data Management Language) -> works on the data/records (rows) stored in those tables. ex - insert, update & delete
+-- Easy way to remember 🧠
+-- DDL = Design/Definition → structure
+-- DML = Manipulation → data/rows 
+-- 4. DCL (Data Control Language) -> grant & revoke permissions to users
+-- 5. TCL (Transaction Control Language) -> start transaction, commit, rollback. {Comes in Advanced DBMS}
+-- WE'll majorily working on DDL, DQL and DML
+
+-- And here the MAIN SQL Queries (starts)...
+-- # Database Related Queries..
+-- 1. Creation...
+-- create database database_name;
+-- Special case - If you only want to create the database if doesn't exists already you write...
+-- create database if not exists database_name; # and if it exists previously will give a warning not an error
+
+-- 2. Deletion... 
+-- drop database database_name;
+-- special case - if database exists then only drop/delete the database.. to save us from getting error!
+-- drop database if exists database_name;
+
+-- 3. Displaying...
+show databases; --  -> Will show all the databases present or currently existing..
+show tables; -- -> Will show all the tables present in the following database.
+
+-- # Table Related Queries...
+-- 1. Creation..
+create table newi(
+	id int primary key, 
+    name varchar(50)
+);
+
+-- 2. Deletion..
+drop table newi; 
+
+-- primary key: means ki value kbhi null nhi hogi and should be unique... and these terms aren't separated means
+-- it not like ki you can just write/use primary or key differently for there usage..
+create table ret(
+	id int primary key,
+    roll_no int(3)
+);
+drop table ret;
+
+create table new_table(
+	id int primary key,
+    name varchar(50)
+);
+
+-- 3. (IMP) Displaying...
+-- to view all items in table.. we use select keyword -> syntax: select * from table_name; '*' means all
+select * from new_table;
+
+-- 4. (IMP) Insertion...
+insert into new_table 
+	(id, name) values
+    (6, "Consellation x Judgement"),
+    (7, "Moon x Cause");
+
+-- Mention- Order is important..
+-- Adding single value..
+insert into new_table values(8, "ChangesxCollapse");
+select * from new_table;
+
+-- Homework Question -> Create a database for your company XYZ
+-- Homework Question - Solution.. 
+create database dc;
+use dc;
+create table tab1(
+	id int primary key,
+    name varchar(50),
+    salary int not null
+);
+
+insert into tab1(id,name,salary) 
+    values
+    (1, "admin",25000),
+    (2, "bob", 30000),
+    (3, "casey", 40000);
+    
+select * from tab1;
+
+
+
+-- Keys..
+-- 1. Primary key -> It is a column(or set of columns) in a table that uniquely identifies each row.
+-- there can be only one primary key in a given table.. neither should be not null..
+
+-- 2. Foriegn Key -> A foreign key is a column(or set of columns) in a table that refers to the primary key 
+-- of another table..
+-- There can be multiple Foreign keys..
+-- Foreign key have duplicate & null values..
+-- A primary key of any table may act as a foreign key for any other table..
+
+
+-- Constraints..
+-- SQL contraints are used to specify rules for data in a table.. Some of the following constraints are given below..
+-- 1. Not null -> columns cannot have null; example- col1 int not null
+-- 2. Unique -> all values in column are different; example- col2 int unique
+-- 3. Primary key -> makes a column unique and not null but only for one... we can provide two arguments together
+-- and define the primary key constraints as.. 
+create table tab2(
+	id int,
+    name varchar(50),
+    age int,
+    city varchar(90),
+    primary key(id,name) -- Now at this place id and name can be same but one of them will vary from other.
+    
+);
+
+-- 4. Foreign Key -> prevents actions that would destroy linkes between tables..
+create table temp(
+	creat_id int,
+    foreign key (creat_id) references tab2(id) 
+    -- basic syntax: 
+    -- 1. create a variable..
+    -- 2. syntax : foreign key (created_variable_name) references another_table_name(column_name);
+    
+); 
+
+-- 5. Default -> sets the default value for a column..
+create table for_defaut(
+	salary int default 2000,
+    name varchar(50) default "Hiroshi Nohara.."
+);
+
+
+-- 6. Check Constraint ->  it can limit the values allowed in a column..(Kind of if statement)
+create table city(
+	id int primary key,
+    city varchar(50),
+    age int,
+    constraint age check (age>=18 And city = "Delhi") -- here constraint word is also important 
+     
+);
+
+-- Basic syntax: constraint variable_name check (var_name>=18 and city = "Delhi");
+
+create database something_details;
+use something_details;
+
+create table new_table_details(
+	roll_no int primary key,
+    name varchar(50),
+    marks int not null,
+    grade varchar(1) default(6),
+    city varchar(80)
+);
+
+insert into new_table_details 
+(roll_no,name,marks,grade,city) 
+	values (101,'Anil', 78, "C", "Pune"),
+	(102,'bhumika', 93, "A", "Mumbai"),
+	(103,'chetan', 85, "B", "Mumbai"),
+	(104,'emaneul', 96, "A", "Delhi"),
+	(105,'dhruv', 12, "F", "Delhi"), 
+	(106,'Farah', 82, "B", "Delhi");
+    
+-- Select Command.. -> used to view/select any data from the database..
+-- TO select all; 
+select * from new_table_details;
+
+-- To select specific columns..
+-- Select col1,col2 from new_table_details; 
+select roll_no, name from new_table_details; 
+-- DISTINCT keyword is used to give unique/no-repeated data only..
+select distinct city from new_table_details; 
+
+
+-- Where command -> to define some conditions..
+select * from new_table_details where roll_no >=104;
+select * from new_table_details where city="Mumbai";
+-- We can also user And for using various where clauses..ex-
+select * from new_table_details where city="Pune" and marks>=90 and roll_no>=104;
+
+-- => Using operators in where clause;
+-- 1. Arithmetic operators - (+, -, *, /, %);	
+-- 2. Comparision operators - (<, >, =, !=, >=, <=);  
+-- 3. Logical Opertors - (AND, IF, NOT, IN, BETWEEN, ALL, LIKE, ANY) -> (IMP)
+-- 4. Bitwise operators - Bitwise And(&), Bitwise Or(|)
+
+-- Logical Opertors... {IMP}
+-- 1.And  operator -> means both values should be true or satisfied to get the following data... 
+-- 2.Or operator -> means if any of the values get true or satified the data will be shown/printed..
+-- 3.In operator -> mathces any value in the list means it gives the data of given values..
+-- example- where city in ("Delhi", "Mumbai"); gives the value which are present in both Delhi and Mumbai 
+select * from new_table_details where city in ("Delhi", "Mumbai");
+-- 4.Between operator -> selects for a given range.. ex- where marks between 80 and 90-> NOTE- It is inclusive in nature..
+-- means both 80 and 90 will be counted..-- 
+-- 5.Not In - Opposite to In operator -> 
+
+select city, avg(marks) from new_table_details group by city order by avg(marks);
+
+-- Order by - by default gives data in ascending order..
+
+-- Question -> 
+create table TQ(
+	customer_id int primary key,
+    customer varchar(50),
+    mode varchar(20),
+    city varchar(30)
+);
+
+insert into TQ 
+(customer_id, customer, mode, city) 
+values 
+(101, "Olivia Barrett", "Netbanking", "Portland"),
+(102, "Ethan", "Credit", "Miami"),
+(103, "Maya", "Credit", "seattle"),
+(104, "Liam", "Netbanking", "Denver"),
+(105, "Sophia", "Credit", "New orleans"),
+(106, "Caleb ", "Debit", "Minnearpolis"),
+(107, "Ava", "Debit", "Phoenix"),
+(108, "Lucas", "Netbanking", "Boston"),
+(109, "Isabella", "Netbanking", "Nashville"),
+(110, "Jackson", "Credit", "Boston");
+
+select mode, count(customer) from TQ group by mode;
+
+
+-- Having clause... -> similar to where i.e. applies some conditions on rows..
+-- used we want to apply any condition after grouping..
+
+-- ex- Q. count number of students in city where max marks cross 90
+select city, count(roll_no) from new_table_details group by city having max(marks)>90;
+
+
+-- General Order of writing clauses ...
+-- select
+-- from
+-- where
+-- group by
+-- having
+-- order by 
+
+-- Remembering trick: So from where? Gurgoan Head Quaters..
+
+-- => Update.. -> to update existing rows..
+set sql_safe_updates = 0;
+update new_table_details
+set grade = "O"
+where grade = "A";
+-- Gives error of safe mode by defaut so that the data doesn't change automatically..
+-- To turn off safe mode we need to write -> set sql_safe_updates = 0;
+
+SELECT * FROM new_table_details;
+
+update new_table_details
+set marks = 90
+where marks >= 80;
+SELECT * FROM new_table_details; 
+
+update new_table_details
+set marks = marks + 1;
+SELECT * FROM new_table_details;
+
+-- Delete... 1:57:00
